@@ -1,0 +1,16 @@
+{
+  "name": "ridemap",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Nick-Brennan/ridemap",
+  "authors": [
+    "Nick Brennan <nick_p_b@yahoo.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
