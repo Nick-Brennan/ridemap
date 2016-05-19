@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ridemap">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>RideMap</title>
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+
+    <!-- VENDOR SCRIPTS -->
+    <script src="vendor/lodash/lodash.js"></script>
+    <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/angular-route/angular-route.min.js"></script>
+    <script src="vendor/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+    <script src="vendor/angular-google-maps/dist/angular-google-maps.min.js"></script>
+
+    <!-- APPLICATION SCRIPTS -->
+    <script src="static/js/app.js"></script>
+    <script src="static/js/RideIndexController.js"></script>
+
+  </head>
+  <body>
+    <h1 class="text-center">RideMap</h1>
+    <div ng-view>
+
+    </div>
+  </body>
+
+</html>
