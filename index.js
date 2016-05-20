@@ -11,6 +11,10 @@ app.get('/', function(req, res){
   res.sendFile(views + '/index.html');
 });
 
+app.get('/data', function(req, res){
+  res.send(ENV['LYFT_CLIENT_ID']);
+});
+
 
 http.listen(process.env.PORT || 3000, function(){
 	console.log("RideMap is listening on port " + (process.env.PORT || 3000));
