@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+require('dotenv').config();
 var http = require('http').Server(app);
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -12,7 +13,8 @@ app.get('/', function(req, res){
 });
 
 app.get('/data', function(req, res){
-  res.send(ENV['LYFT_CLIENT_ID']);
+  console.log(process.env.TEST_DATA)
+  res.send(process.env.TEST_DATA);
 });
 
 
