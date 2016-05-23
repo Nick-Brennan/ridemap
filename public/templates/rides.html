@@ -1,7 +1,7 @@
 <div class="container">
   <h1>TESTING</h1>
   <ui-gmap-google-map center='rideIndexCtrl.map.center' zoom='rideIndexCtrl.map.zoom'>
-    <ui-gmap-polyline path='google.maps.geometry.encoding.decodePath(rideIndexCtrl.d_route.data.routes[0].overview_polyline.points)'
+    <ui-gmap-polyline path='rideIndexCtrl.d_route'
                       stroke='{color: "blue", opacity: 0.75, }'
                       clickable='false'
                       draggable='false'
@@ -19,7 +19,7 @@
     </p>
     <br />
     <small>
-      {{rideIndexCtrl.d_route.data.routes[0].overview_polyline.points}}
+      {{rideIndexCtrl.d_route}}
     </small>
   </div>
 </div>

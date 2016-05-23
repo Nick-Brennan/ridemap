@@ -23,7 +23,62 @@ angular
       url: '/route'
     }).then(function(json){
       console.log(json);
-      vm.d_route = json;
+      var new_route_string = json.data.routes[0].overview_polyline.points;
+      var new_route_array = decodePolyline(new_route_string);
+      var temp_arr = [];
+      new_route_array.forEach(function(arr){
+        var temp_obj = {};
+        temp_obj.latitude = arr[0];
+        temp_obj.longitude = arr[1];
+
+        temp_arr.push(temp_obj);
+      });
+      vm.d_route = temp_arr;
       console.log("route polyline: ", vm.d_route);
     });
   }
+
+  function decodePolyline(str, precision) {
+    var index = 0,
+        lat = 0,
+        lng = 0,
+        coordinates = [],
+        shift = 0,
+        result = 0,
+        byte = null,
+        latitude_change,
+        longitude_change,
+        factor = Math.pow(10, precision || 5);
+
+    while (index < str.length) {
+
+        byte = null;
+        shift = 0;
+        result = 0;
+
+        do {
+            byte = str.charCodeAt(index++) - 63;
+            result |= (byte & 0x1f) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+
+        latitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+        shift = result = 0;
+
+        do {
+            byte = str.charCodeAt(index++) - 63;
+            result |= (byte & 0x1f) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+
+        longitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+        lat += latitude_change;
+        lng += longitude_change;
+
+        coordinates.push([lat / factor, lng / factor]);
+    }
+
+    return coordinates;
+}
