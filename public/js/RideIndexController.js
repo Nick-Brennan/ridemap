@@ -6,7 +6,7 @@ angular
 
   function RideIndexController($http){
     var vm = this;
-    vm.map = {center: { latitude: 37.7246, longitude: -122.4434 }, zoom: 12 }
+    vm.map = {center: { latitude: 37.8361, longitude: -122.4789 }, zoom: 12 }
     vm.data
     vm.d_route
     $http({
