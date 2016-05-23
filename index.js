@@ -1,12 +1,16 @@
+//node/express setup
+
 var express = require('express');
 var app = express();
 require('dotenv').config();
 var http = require('http').Server(app);
 var Uber = require('node-uber');
-var request = require('request');
+var request = require('request'); //for serverside http requests
 var bodyParser = require('body-parser');
 var path = require('path');
 var views = path.join(process.cwd(), "views");
+
+//middle-ware
 app.use("/static", express.static("public"));
 app.use("/vendor", express.static("bower_components"));
 
@@ -20,6 +24,8 @@ app.use("/vendor", express.static("bower_components"));
 //   sandbox: true // optional, defaults to false
 // });
 
+
+//routes
 app.get('/', function(req, res){
   res.sendFile(views + '/index.html');
 });
@@ -38,6 +44,8 @@ app.get('/data', function(req, res){
 });
 
 
+
+//start the server
 http.listen(process.env.PORT || 3000, function(){
 	console.log("RideMap is listening on port " + (process.env.PORT || 3000));
 });
