@@ -30,6 +30,20 @@ app.get('/', function(req, res){
   res.sendFile(views + '/index.html');
 });
 
+app.get('/test', function(req, res){
+
+  request('https://maps.googleapis.com/maps/api/directions/json?origin=sanfrancisco&destination=dailycity&key=AIzaSyAwtMDXCmDiBxw9iI-yQV1Qc_sGwcBVzZ0',
+    function (error, response, body) {
+    if(error){console.log(error);}
+    if (!error && response.statusCode == 200) {
+      console.log("The Response: ", response.statusCode);
+      console.log("The Body: ", body);
+      res.send(body);
+    }
+  });
+
+});
+
 app.get('/data', function(req, res){
   console.log(process.env.TEST_DATA);
 
@@ -40,8 +54,20 @@ app.get('/data', function(req, res){
       console.log(body);
       res.send(body);
     }
-  })
+  });
 });
+
+app.get('/route', function(req, res){
+  request('https://maps.googleapis.com/maps/api/directions/json?origin=sanfrancisco&destination=dailycity&key=AIzaSyAwtMDXCmDiBxw9iI-yQV1Qc_sGwcBVzZ0',
+    function (error, response, body) {
+    if(error){console.log(error);}
+    if (!error && response.statusCode == 200) {
+      console.log(body);
+      res.send(body);
+    }
+  });
+});
+
 
 
 

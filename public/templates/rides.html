@@ -1,16 +1,25 @@
 <div class="container">
   <h1>TESTING</h1>
   <ui-gmap-google-map center='rideIndexCtrl.map.center' zoom='rideIndexCtrl.map.zoom'>
-    <!-- <ui-gmap-marker ng-repeat="earthquake in quakeIndexCtrl.quakes" coords="{latitude: earthquake.geometry.coordinates[1], longitude: earthquake.geometry.coordinates[0]}" idkey="$index">
-          <ui-gmap-window>
-            <div></div>
-          </ui-gmap-window>
-        </ui-gmap-marker> -->
+    <ui-gmap-polyline path='google.maps.geometry.encoding.decodePath(rideIndexCtrl.d_route.data.routes[0].overview_polyline.points)'
+                      stroke='{color: "blue", opacity: 0.75, }'
+                      clickable='false'
+                      draggable='false'
+                      editable='false'
+                      geodesic='false'
+                      visible='true'
+                      fit='true'
+                      static='true'>
+      </ui-gmap-polyline>
   </ui-gmap-google-map>
 
   <div class="row">
     <p>
       {{rideIndexCtrl.data.data}}
     </p>
+    <br />
+    <small>
+      {{rideIndexCtrl.d_route.data.routes[0].overview_polyline.points}}
+    </small>
   </div>
 </div>
