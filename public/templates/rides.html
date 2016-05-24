@@ -1,22 +1,25 @@
 <div class="container">
-  <h1>TESTING</h1>
-  <ui-gmap-google-map center='rideIndexCtrl.map.center' zoom='rideIndexCtrl.map.zoom'>
-    <ui-gmap-polyline path='rideIndexCtrl.d_route'
-                      stroke='{color: "blue", opacity: 0.75, }'
-                      clickable='false'
-                      draggable='false'
-                      editable='false'
-                      geodesic='false'
-                      visible='true'
-                      fit='true'
-                      static='true'>
-      </ui-gmap-polyline>
-  </ui-gmap-google-map>
+  <center>
+    <ui-gmap-google-map center='rideIndexCtrl.map.center' zoom='rideIndexCtrl.map.zoom'>
+      <ui-gmap-polyline path='rideIndexCtrl.d_route'
+                        stroke='{color: "blue", opacity: 0.75, }'
+                        clickable='false'
+                        draggable='false'
+                        editable='false'
+                        geodesic='false'
+                        visible='true'
+                        fit='true'
+                        static='true'>
+        </ui-gmap-polyline>
+    </ui-gmap-google-map>
+  </center>
 
   <div class="row">
-    <p>
-      {{rideIndexCtrl.data.data}}
-    </p>
+    <center>
+      <h2>
+        {{rideIndexCtrl.data.data.prices[0].estimate}}
+      </h2>
+    </center>
     <br />
     <small>
       {{rideIndexCtrl.d_route}}
