@@ -9,20 +9,20 @@ angular
     vm.map = {center: { latitude: 37.8361, longitude: -122.4789 }, zoom: 12 }
     vm.data
     vm.d_route
+
+    //retrieving uber ride data
     $http({
       method: 'GET',
       url: '/data'
     }).then(function(json){
-      console.log(json);
       vm.data = json;
-      console.log("data!!: ", vm.data);
     });
 
+    //hitting the google directions api
     $http({
       method: 'GET',
       url: '/route'
     }).then(function(json){
-      console.log(json);
       var new_route_string = json.data.routes[0].overview_polyline.points;
       var new_route_array = decodePolyline(new_route_string);
       var temp_arr = [];
@@ -34,10 +34,11 @@ angular
         temp_arr.push(temp_obj);
       });
       vm.d_route = temp_arr;
-      console.log("route polyline: ", vm.d_route);
     });
   }
 
+
+//polyline decryption function extracted from mapbox's polyline node package
   function decodePolyline(str, precision) {
     var index = 0,
         lat = 0,
