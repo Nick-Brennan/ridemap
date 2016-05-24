@@ -6,9 +6,11 @@ angular
 
   function RideIndexController($http){
     var vm = this;
-    vm.map = {center: { latitude: 37.8361, longitude: -122.4789 }, zoom: 12 }
-    vm.data
-    vm.d_route
+    vm.center = [null, null];
+    vm.map = {center: { latitude: vm.center[0] || 37.8361, longitude: vm.center[1] || -122.4789 }, zoom: 12 };
+    vm.data;
+    vm.d_route;
+    vm.new_address = {};
 
     //retrieving uber ride data
     $http({
@@ -34,7 +36,46 @@ angular
         temp_arr.push(temp_obj);
       });
       vm.d_route = temp_arr;
+      vm.center = temp_arr[Math.floor(temp_arr.length / 2)];
+      console.log("center : ", vm.center);
     });
+
+    vm.test = function(){
+      console.log('testing: ', vm.new_address);
+      $http({
+        method: 'POST',
+        url: '/route',
+        data: vm.new_address
+      }).then(function(json){
+        var new_route_string = json.data.routes[0].overview_polyline.points;
+        var new_route_array = decodePolyline(new_route_string);
+        var temp_arr = [];
+        new_route_array.forEach(function(arr){
+          var temp_obj = {};
+          temp_obj.latitude = arr[0];
+          temp_obj.longitude = arr[1];
+
+          temp_arr.push(temp_obj);
+        });
+        vm.d_route = temp_arr;
+        vm.center = temp_arr[Math.floor(temp_arr.length / 2)];
+        vm.map = {center: { latitude: vm.center['latitude'], longitude: vm.center['longitude'] }, zoom: 12 };
+        console.log("center : ", vm.center);
+        vm.updateCost();
+      });
+      // $http.post('/route', JSON.stringify(vm.new_address)).then(function(){console.log('hit the post route')});
+    };
+
+    vm.updateCost = function(){
+      console.log('getting new price from Uber');
+      $http({
+        method: 'POST',
+        url: '/data',
+        data: {'start': vm.d_route[0], 'end': vm.d_route[vm.d_route.length -1]}
+      }).then(function(json){
+        vm.data = json
+      });
+    }
   }
 
 

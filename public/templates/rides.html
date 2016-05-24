@@ -1,18 +1,27 @@
 <div class="container">
-  <center>
-    <ui-gmap-google-map center='rideIndexCtrl.map.center' zoom='rideIndexCtrl.map.zoom'>
-      <ui-gmap-polyline path='rideIndexCtrl.d_route'
-                        stroke='{color: "blue", opacity: 0.75, }'
-                        clickable='false'
-                        draggable='false'
-                        editable='false'
-                        geodesic='false'
-                        visible='true'
-                        fit='true'
-                        static='true'>
-        </ui-gmap-polyline>
-    </ui-gmap-google-map>
-  </center>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <ui-gmap-google-map center='rideIndexCtrl.map.center' zoom='rideIndexCtrl.map.zoom'>
+          <ui-gmap-polyline path='rideIndexCtrl.d_route'
+                            stroke='{color: "blue", opacity: 0.75, }'
+                            clickable='false'
+                            draggable='false'
+                            editable='false'
+                            geodesic='false'
+                            visible='true'
+                            fit='true'
+                            static='true'>
+            </ui-gmap-polyline>
+        </ui-gmap-google-map>
+    </div>
+    <div class="col-md-3">
+      <form ng-submit="rideIndexCtrl.test()">
+        <input name="start" placeholder="Start Point" ng-model="rideIndexCtrl.new_address.start"/>
+        <input name="end" placeholder="End Point" ng-model="rideIndexCtrl.new_address.end"/>
+        <input type="submit" value="Submit"/>
+      </form>
+    </div>
+  </div>
 
   <div class="row">
     <center>

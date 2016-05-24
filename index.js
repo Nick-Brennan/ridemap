@@ -7,6 +7,9 @@ var http = require('http').Server(app);
 var Uber = require('node-uber');
 var request = require('request'); //for serverside http requests
 var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+// need to add this so that we can accept request payloads
+app.use(bodyParser.json());
 var path = require('path');
 var views = path.join(process.cwd(), "views");
 
@@ -45,13 +48,11 @@ app.get('/test', function(req, res){
 });
 
 app.get('/data', function(req, res){
-  console.log(process.env.TEST_DATA);
 
   request('https://api.uber.com/v1/estimates/price?start_latitude=37.7909&start_longitude=-122.4016&end_latitude=37.785114&end_longitude=-122.406677&server_token='
      + process.env.UBER_SERVER_TOKEN, function (error, response, body) {
     if(error){console.log(error);}
     if (!error && response.statusCode == 200) {
-      console.log(body);
       res.send(body);
     }
   });
@@ -62,12 +63,32 @@ app.get('/route', function(req, res){
     function (error, response, body) {
     if(error){console.log(error);}
     if (!error && response.statusCode == 200) {
-      console.log(body);
       res.send(body);
     }
   });
 });
 
+app.post('/route', function(req, res){
+  console.log("post request: ", req.body);
+  request('https://maps.googleapis.com/maps/api/directions/json?origin=' + encodeURIComponent(req.body.start) + '&destination=' + encodeURIComponent(req.body.end) + '&key=AIzaSyAwtMDXCmDiBxw9iI-yQV1Qc_sGwcBVzZ0',
+    function (error, response, body) {
+    if(error){console.log(error);}
+    if (!error && response.statusCode == 200) {
+      res.send(body);
+    }
+  });
+});
+
+app.post('/data', function(req, res){
+  console.log("fetching new ride data for: ", req.body);
+  request('https://api.uber.com/v1/estimates/price?start_latitude=' + req.body.start.latitude + '&start_longitude=' + req.body.start.longitude + '&end_latitude=' + req.body.end.latitude + '&end_longitude=' + req.body.end.longitude + '&server_token='
+     + process.env.UBER_SERVER_TOKEN, function (error, response, body) {
+    if(error){console.log(error);}
+    if (!error && response.statusCode == 200) {
+      res.send(body);
+    }
+  });
+});
 
 
 
