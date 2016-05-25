@@ -11,6 +11,218 @@ angular
     vm.data;
     vm.d_route;
     vm.new_address = {};
+    vm.options = {
+            styles: [{
+      "featureType": "administrative",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#444444"
+          }
+      ]
+      },
+      {
+      "featureType": "landscape",
+      "elementType": "all",
+      "stylers": [
+          {
+              "color": "#f2f2f2"
+          }
+      ]
+      },
+      {
+      "featureType": "landscape",
+      "elementType": "geometry.fill",
+      "stylers": [
+          {
+              "color": "#ffffff"
+          }
+      ]
+      },
+      {
+      "featureType": "landscape.man_made",
+      "elementType": "geometry.fill",
+      "stylers": [
+          {
+              "color": "#ffffff"
+          }
+      ]
+      },
+      {
+      "featureType": "landscape.natural",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#ff0000"
+          }
+      ]
+      },
+      {
+      "featureType": "landscape.natural.landcover",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#ff0000"
+          }
+      ]
+      },
+      {
+      "featureType": "landscape.natural.terrain",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#ff0000"
+          }
+      ]
+      },
+      {
+      "featureType": "poi",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+      },
+      {
+      "featureType": "road",
+      "elementType": "all",
+      "stylers": [
+          {
+              "saturation": -100
+          },
+          {
+              "lightness": 45
+          }
+      ]
+      },
+      {
+      "featureType": "road.highway",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "simplified"
+          }
+      ]
+      },
+      {
+      "featureType": "road.highway",
+      "elementType": "geometry.fill",
+      "stylers": [
+          {
+              "color": "#000000"
+          }
+      ]
+      },
+      {
+      "featureType": "road.highway",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#000000"
+          },
+          {
+              "weight": "0.62"
+          }
+      ]
+      },
+      {
+      "featureType": "road.highway.controlled_access",
+      "elementType": "geometry.fill",
+      "stylers": [
+          {
+              "color": "#000000"
+          }
+      ]
+      },
+      {
+      "featureType": "road.highway.controlled_access",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "weight": "0.24"
+          }
+      ]
+      },
+      {
+      "featureType": "road.arterial",
+      "elementType": "geometry.fill",
+      "stylers": [
+          {
+              "color": "#000000"
+          }
+      ]
+      },
+      {
+      "featureType": "road.arterial",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#000000"
+          }
+      ]
+      },
+      {
+      "featureType": "road.arterial",
+      "elementType": "labels.icon",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+      },
+      {
+      "featureType": "road.local",
+      "elementType": "geometry.fill",
+      "stylers": [
+          {
+              "color": "#000000"
+          },
+          {
+              "weight": "0.52"
+          }
+      ]
+      },
+      {
+      "featureType": "road.local",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#363636"
+          }
+      ]
+      },
+      {
+      "featureType": "transit",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+      },
+      {
+      "featureType": "water",
+      "elementType": "all",
+      "stylers": [
+          {
+              "color": "#000000"
+          },
+          {
+              "visibility": "on"
+          }
+      ]
+      },
+      {
+      "featureType": "water",
+      "elementType": "geometry.fill",
+      "stylers": [
+          {
+              "color": "#5c5c5c"
+          }
+      ]
+      }]
+          }
 
     //retrieving uber ride data
     $http({
@@ -59,7 +271,19 @@ angular
         });
         vm.d_route = temp_arr;
         vm.center = temp_arr[Math.floor(temp_arr.length / 2)];
-        vm.map = {center: { latitude: vm.center['latitude'], longitude: vm.center['longitude'] }, zoom: 12 };
+        vm.map = {
+          center: { latitude: vm.center['latitude'], longitude: vm.center['longitude'] },
+          zoom: 12,
+          options: {
+              minZoom: 8,
+              maxZoom: 20,
+              disableDefaultUI: true,
+              panControl: false,
+              zoomControl: false,
+              scaleControl: false,
+              streetViewControl: false,
+              overviewMapControl: false
+          }};
         console.log("center : ", vm.center);
         vm.updateCost();
       });
