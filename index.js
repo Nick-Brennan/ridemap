@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 require('dotenv').config();
 var http = require('http').Server(app);
-var Uber = require('node-uber');
+// var Uber = require('node-uber');
 var request = require('request'); //for serverside http requests
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
