@@ -17,7 +17,7 @@ angular
       "elementType": "labels.text.fill",
       "stylers": [
           {
-              "color": "#444444"
+              // "color": "#444444"
           }
       ]
       },
@@ -197,7 +197,7 @@ angular
       "elementType": "all",
       "stylers": [
           {
-              "visibility": "off"
+              "visibility": "on"
           }
       ]
       },
@@ -206,7 +206,7 @@ angular
       "elementType": "all",
       "stylers": [
           {
-              "color": "#000000"
+              "color": "#5c5c5c"
           },
           {
               "visibility": "on"
@@ -261,6 +261,7 @@ angular
       }).then(function(json){
         var new_route_string = json.data.routes[0].overview_polyline.points;
         var new_route_array = decodePolyline(new_route_string);
+        console.log(new_route_array);
         var temp_arr = [];
         new_route_array.forEach(function(arr){
           var temp_obj = {};
